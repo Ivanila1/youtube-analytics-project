@@ -16,6 +16,34 @@ class Channel:
         self.video_count = self.channel['items'][0]['statistics']['videoCount']
         self.views_count = self.channel['items'][0]['statistics']['viewCount']
 
+    def __str__(self):
+        return f'{self.title} {self.url}'
+
+    def __add__(self, other):
+        return int(self.subscriber_count) + int(other.subscriber_count)
+
+    def __sub__(self, other):
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __sub__(self, other):
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __gt__(self, other):
+        return int(self.subscriber_count) > int(other.subscriber_count)
+
+    def __ge__(self, other):
+        return int(self.subscriber_count) >= int(other.subscriber_count)
+
+    def __lt__(self, other):
+        return int(self.subscriber_count) < int(other.subscriber_count)
+
+    def __le__(self, other):
+        return int(self.subscriber_count) <= int(other.subscriber_count)
+
+    def __eq__(self, other):
+        return int(self.subscriber_count) == int(other.subscriber_count)
+
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         print(json.dumps(self.channel, indent=2,ensure_ascii=False))
@@ -28,14 +56,8 @@ class Channel:
 
 
     def to_json(self, filename):
-        list_json = {}
-        list_json['id'] = self.channel_id
-        list_json['title'] = self.title
-        list_json['description'] = self.description
-        list_json['url'] = self.url
-        list_json['subscriber_count'] = self.subscriber_count
-        list_json['video_count'] = self.video_count
-        list_json['views_count'] = self.views_count
-
+        list_json = {'id': self.channel_id, 'title': self.title, 'description': self.description, 'url': self.url,
+                     'subscriber_count': self.subscriber_count, 'video_count': self.video_count,
+                     'views_count': self.views_count}
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(json.dumps(list_json, indent=2,ensure_ascii=False))
