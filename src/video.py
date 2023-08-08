@@ -5,7 +5,7 @@ class Video:
         self.video_id = video_id
         video_response = Channel.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails',id=video_id).execute()
         self.video_title: str = video_response['items'][0]['snippet']['title']
-        self.url: str = video_response['items'][0]['snippet']['thumbnails']["default"]['url']
+        self.url: str = f'https://www.youtube.com/watch?v={video_id}'
         self.view_count: int = video_response['items'][0]['statistics']['viewCount']
         self.like_count: int = video_response['items'][0]['statistics']['likeCount']
 
